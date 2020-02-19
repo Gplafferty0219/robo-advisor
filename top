@@ -1,0 +1,25 @@
+[1mdiff --git a/app/robo.py b/app/robo.py[m
+[1mindex f78b93a..da594c8 100644[m
+[1m--- a/app/robo.py[m
+[1m+++ b/app/robo.py[m
+[36m@@ -1,5 +1,20 @@[m
+ # app/robo_advisor.py[m
+ [m
+[32m+[m[32mimport requests[m
+[32m+[m[32mimport json[m
+[32m+[m
+[32m+[m[32m#[m
+[32m+[m[32m# Info Inputs[m
+[32m+[m[32m#[m
+[32m+[m[32mrequest_url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=5min&apikey=demo"[m
+[32m+[m
+[32m+[m[32mresponse = requests.get(request_url)[m
+[32m+[m
+[32m+[m[32mparsed_response = json.loads(response.text)[m
+[32m+[m
+[32m+[m[32mbreakpoint()[m
+[32m+[m
+[32m+[m
+ print("-------------------------")[m
+ print("SELECTED SYMBOL: XYZ")[m
+ print("-------------------------")[m
