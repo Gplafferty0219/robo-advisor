@@ -44,15 +44,33 @@ for date in dates:
 recent_high = max(high_prices)
 recent_low = min(low_prices)
 
+
 csv_file_path = os.path.join(os.path.dirname(__file__), "..", "data" , "prices.csv")
 
-with open(csv_file_path,something something):
-    blah
-    blah
-    blah
-    blah
+csv_headers = ("timestamp", "open", "high", "low", "close", "volume")
 
+with open(csv_file_path, "w") as csv_file:
+    writer = csv.DictWriter(csv_file, fieldnames=csv_headers)
+    writer.writeheader()
 
+    writer.writerow({
+        "timestamp": "TODO",
+        "open": "TODO",
+        "high": "TODO",
+        "low": "TODO",
+        "close": "TODO",
+        "volume": "TODO"
+    })
+    writer.writerow({
+        "timestamp": "TODO",
+        "open": "TODO",
+        "high": "TODO",
+        "low": "TODO",
+        "close": "TODO",
+        "volume": "TODO"
+    })
+
+    
 print("-------------------------")
 print("SELECTED SYMBOL: XYZ")
 print("-------------------------")
@@ -71,5 +89,6 @@ print(f"WRITING DATA TO CSV {csv_file_path}...")
 print("-------------------------")
 print("HAPPY INVESTING!")
 print("-------------------------")
+
 
 
