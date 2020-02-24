@@ -2,8 +2,10 @@
 import csv
 import json
 import os
-
+from dotenv import load_dotenv
 import requests
+
+load_dotenv()
 
 
 
@@ -14,7 +16,11 @@ def to_usd(my_price):
 #
 # Info Inputs
 #
-request_url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&apikey=demo"
+api_key = os.environ.get("ALPHAVANTAGE_API_KEY")
+
+symbol = "MSFT"
+
+request_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={symbol}&apikey={api_key}"
 
 response = requests.get(request_url)
 
@@ -27,7 +33,6 @@ tsd = parsed_response["Time Series (Daily)"]
 dates = list(tsd.keys())
 
 latest_day = dates[0]
-
 latest_close = tsd[latest_day]["4. close"]
 
 #get high price from each day
