@@ -23,7 +23,8 @@ while True:
     symbol = input("Please enter a ticker or type 'DONE' when you are finished: ")
     if symbol == "DONE":
         exit()
-    print(len(symbol))
+
+    #
     while True:
         if str.isnumeric(symbol) or len(symbol) > 5:
             print("Sorry")
@@ -84,7 +85,6 @@ while True:
     #REQUEST TIME
     today = datetime.datetime.today()
 
-
     #-----------------------------------------#
     #RECEIPT
     print("-------------------------")
@@ -98,6 +98,8 @@ while True:
     print(f"RECENT HIGH: {to_usd(float(recent_high))}")
     print(f"RECENT LOW: {to_usd(float(recent_low))}")
     print("-------------------------")
+#RECOMMENDS YOU BUY WHEN STOCK IS LOW AND SELL WHEN HIGH
+#RECOMMENDS YOU TO HOLD IF THERE IS OVERLAP OR IF STOCK IS IN THE MIDDLE OF THIS RANGE
     if float(latest_close) >= (0.80*(float(recent_high))) and float(latest_close) <= (1.20*(float(recent_low))):
         print("RECOMMENDATION: HOLD")
         print("RECOMMENDATION: Your stock is not very volatile. Hold for and hope for some steady returns.")
