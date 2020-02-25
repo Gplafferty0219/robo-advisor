@@ -1,9 +1,32 @@
-# robo-advisor Project
+# Robo-Advisor Project
 
-My soltuion to the Robo Advisor project:
+Utilizes AlphaVantage Stock Market API (https://www.alphavantage.co/) to pull updated trading recommendations.
 
-# installation
-clone or download this repository: onto your computer
+## Prerequisites
+
+    + Anaconda 3.7
+    + Python 3.7
+    + Pip
+
+## Installation
+
+Clone or download this repository: https://github.com/Gplafferty0219/robo-advisor onto your computer. The navigate there using the following commands:
+
+'''sh
+cd Desktop
+'''
+
+'''sh
+cd robo-advisor
+'''
+
+Use Anaconda to create and activate a new virtual environment called something like "stocks-env". You can use the following commands
+
+'''sh
+conda create -n stocks-env
+conda activate stocks-env
+'''
+
 
 Navigate to it using a command line:
  cd robo-advisor
