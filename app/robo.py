@@ -17,27 +17,37 @@ def to_usd(my_price):
 #READS THE API KEY OFF THE .ENV FILE
 api_key = os.getenv("ALPHAVANTAGE_API_KEY", default= "oops")
 
+#WELCOME MESSAGE
+print("---------------------------------------------")
+print("           WELCOME TO STOCK GENIE!           ")
+print("---------------------------------------------")
+
 #LOOPS THE FUNCTION SO YOU CAN ENTER MANY STOCKS
 while True:
     #USER INPUT
     symbol = input("Please enter a ticker or type 'DONE' when you are finished: ")
     if symbol == "DONE":
+        print("THANKS FOR USING STOCK GENIE! GOOD LUCK!")
         exit()
 
-    #
+    #FIRST VALIDATION TO MAKE SURE USER ISN'T TOTALLY LOST
     while True:
         if str.isnumeric(symbol) or len(symbol) > 5:
-            print("Sorry")
+            print("---------------------------------------------")
+            print("Sorry, you might be a bit confused. Try entering a stock ticker that looks something like this: 'AAPL'")
+            print("---------------------------------------------")
             symbol = input("Please enter a ticker or type 'DONE' when you are finished: ")
         elif symbol == "DONE":
+            print("THANKS FOR USING STOCK GENIE! GOOD LUCK!")
             exit()
         else:
             break
 
+    #SECOND VALIDATION IF TICKER IS WRONG
     request_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={symbol}&apikey={api_key}"
-    response = requests.get(request_url)
+    response = requests.get(request_url)   
     if "Error Message" in response.text:
-        print(f"Ticker '{symbol}' could not be found. Please try again.")
+        print(f"We're sorry! The ticker '{symbol}' could not be found. Please try again.")
         exit()
     else:
         parsed_response = json.loads(response.text)
@@ -102,7 +112,7 @@ while True:
 #RECOMMENDS YOU TO HOLD IF THERE IS OVERLAP OR IF STOCK IS IN THE MIDDLE OF THIS RANGE
     if float(latest_close) >= (0.80*(float(recent_high))) and float(latest_close) <= (1.20*(float(recent_low))):
         print("RECOMMENDATION: HOLD")
-        print("RECOMMENDATION: Your stock is not very volatile. Hold for and hope for some steady returns.")
+        print("RECOMMENDATION: Your stock is not very volatile. Hold for nowand hope for some steady returns.")
     elif float(latest_close) <= (1.20*(float(recent_low))):
         print("RECOMMENDATION: BUY!") 
         print("RECOMMENDATION REASON: The stock is at a relatively low price. Buy now before it rises!")
