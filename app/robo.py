@@ -10,6 +10,31 @@ import datetime
 
 load_dotenv()
 
+def get_response(symbol):
+    request_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={symbol}&apikey={api_key}"
+    response = requests.get(request_url)
+    parsed_response = json.loads(response.text)
+    return parsed_response
+
+def transform_response(parsed_response):
+    # parsed_response should be a dictionary representing the original JSON response
+    # it should have keys: "Meta Data" and "Time Series Daily"
+    tsd = parsed_response["Time Series (Daily)"]
+
+    rows = []
+    for date, daily_prices in tsd.items(): # see: https://github.com/prof-rossetti/georgetown-opim-243-201901/blob/master/notes/python/datatypes/dictionaries.md
+        row = {
+            "timestamp": date,
+            "open": float(daily_prices["1. open"]),
+            "high": float(daily_prices["2. high"]),
+            "low": float(daily_prices["3. low"]),
+            "close": float(daily_prices["4. close"]),
+            "volume": int(daily_prices["5. volume"])
+        }
+        rows.append(row)
+
+    return rows
+
 #CONVERT TO $USD
 def to_usd(my_price):
     return "${0:,.2f}".format(my_price)
@@ -38,9 +63,6 @@ if __name__ == "__main__":
                 print("Sorry, you might be a bit confused. Try entering a stock ticker that looks something like this: 'AAPL'")
                 print("---------------------------------------------")
                 symbol = input("Please enter a ticker or type 'DONE' when you are finished: ")
-            elif symbol == "DONE":
-                print("THANKS FOR USING STOCK GENIE! GOOD LUCK!")
-                exit()
             else:
                 break
 
